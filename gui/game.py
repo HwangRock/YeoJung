@@ -10,7 +10,7 @@ class Game:
         pygame.display.set_caption("YeoJung")
         self.font = pygame.font.SysFont(None, 36)
         self.button_rect = pygame.Rect(config.BUTTON_X, config.BUTTON_Y, config.BUTTON_WIDTH, config.BUTTON_HEIGHT)
-        self.button_text = self.font.render("API 요청", True, config.BLACK)
+        self.button_text = self.font.render("API", True, config.BLACK)
         self.api_result = ""
         self.player = Player()
         self.clock = pygame.time.Clock()
@@ -40,7 +40,7 @@ class Game:
     def render(self):
         self.screen.fill(config.WHITE)
         pygame.draw.rect(self.screen, config.GRAY, self.button_rect)
-        self.screen.blit(self.button_text, (self.button_rect.x + 40, self.button_rect.y + 15))
+        self.screen.blit(self.button_text, (self.button_rect.x + 20, self.button_rect.y + 10))
         result_render = self.font.render(self.api_result, True, config.DARK_GRAY)
         self.screen.blit(result_render, (50, 400))
         self.player.draw(self.screen)
