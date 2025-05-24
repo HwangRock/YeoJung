@@ -24,6 +24,17 @@ class Player:
             self.velocity_y = self.jump_strength
             self.isJumping = True
 
+        self.color = config.BLACK
+        if keys[pygame.K_q]:
+            self.color=config.RED
+        if keys[pygame.K_w]:
+            self.color=config.BLUE
+        if keys[pygame.K_e]:
+            self.color=config.GREEN
+        if keys[pygame.K_r]:
+            self.color=config.GRAY
+
+
     def update(self):
         self.handle_input()
         self.velocity_y += self.gravity
