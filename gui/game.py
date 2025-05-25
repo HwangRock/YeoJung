@@ -2,6 +2,7 @@ import pygame
 import requests
 import config
 from player import Player
+from obstacle import Obstacle
 
 class Game:
     def __init__(self):
@@ -13,6 +14,7 @@ class Game:
         self.button_text = self.font.render("API", True, config.BLACK)
         self.api_result = ""
         self.player = Player()
+        self.obstacle=Obstacle()
         self.clock = pygame.time.Clock()
         self.running = True
 
@@ -44,6 +46,7 @@ class Game:
         result_render = self.font.render(self.api_result, True, config.DARK_GRAY)
         self.screen.blit(result_render, (50, 400))
         self.player.draw(self.screen)
+        self.obstacle.draw(self.screen)
         pygame.display.flip()
 
     def run(self):
