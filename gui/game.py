@@ -48,10 +48,16 @@ class Game:
         for o in self.obstacles:
             obstacleRect = pygame.Rect(o.x - o.size, o.y - o.size, 2 * o.size, 2 * o.size)
             if playerRect.colliderect(obstacleRect):
-                print("gameover")
+                print("gameover : obstacle")
 
-        for e in self.enemies:
+        for e in self.enemies[:]:
             e.update()
+            enemyRect = pygame.Rect(e.x, e.y, e.size, e.size)
+            if playerRect.colliderect(enemyRect):
+                if self.player.color == config.BLACK:
+                    print("gameover : enemy")
+                else:
+                    self.enemies.remove(e)
 
     def render(self):
         self.screen.fill(config.WHITE)
