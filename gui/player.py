@@ -1,6 +1,7 @@
 import config
 import pygame
 
+
 class Player:
     def __init__(self):
         self.x = 100
@@ -26,14 +27,13 @@ class Player:
 
         self.color = config.BLACK
         if keys[pygame.K_q]:
-            self.color=config.RED
+            self.color = config.RED
         if keys[pygame.K_w]:
-            self.color=config.BLUE
+            self.color = config.BLUE
         if keys[pygame.K_e]:
-            self.color=config.GREEN
+            self.color = config.GREEN
         if keys[pygame.K_r]:
-            self.color=config.GRAY
-
+            self.color = config.GRAY
 
     def update(self):
         self.handle_input()

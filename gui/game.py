@@ -3,6 +3,8 @@ import requests
 import config
 from player import Player
 from obstacle import Obstacle
+from enemy import Enemy
+
 
 class Game:
     def __init__(self):
@@ -14,7 +16,10 @@ class Game:
         self.button_text = self.font.render("API", True, config.BLACK)
         self.api_result = ""
         self.player = Player()
-        self.obstacles=[Obstacle()]
+        self.obstacles = [Obstacle()]
+        self.enemies = [
+            Enemy(900, config.HEIGHT - config.ENEMY_SIZE)
+        ]
         self.clock = pygame.time.Clock()
         self.running = True
 
@@ -39,11 +44,14 @@ class Game:
     def update(self):
         self.player.update()
 
-        playerRect=pygame.Rect(self.player.x,self.player.y,self.player.size,self.player.size)
+        playerRect = pygame.Rect(self.player.x, self.player.y, self.player.size, self.player.size)
         for o in self.obstacles:
-            obstacleRect=pygame.Rect(o.x-o.size,o.y-o.size,2*o.size,2*o.size)
+            obstacleRect = pygame.Rect(o.x - o.size, o.y - o.size, 2 * o.size, 2 * o.size)
             if playerRect.colliderect(obstacleRect):
                 print("gameover")
+
+        for e in self.enemies:
+            e.update()
 
     def render(self):
         self.screen.fill(config.WHITE)
@@ -55,6 +63,9 @@ class Game:
 
         for o in self.obstacles:
             o.draw(self.screen)
+        for e in self.enemies:
+            e.draw(self.screen)
+
         pygame.display.flip()
 
     def run(self):
