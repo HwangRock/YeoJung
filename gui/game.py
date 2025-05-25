@@ -14,7 +14,7 @@ class Game:
         self.button_text = self.font.render("API", True, config.BLACK)
         self.api_result = ""
         self.player = Player()
-        self.obstacle=Obstacle()
+        self.obstacles=[Obstacle()]
         self.clock = pygame.time.Clock()
         self.running = True
 
@@ -39,6 +39,12 @@ class Game:
     def update(self):
         self.player.update()
 
+        playerRect=pygame.Rect(self.player.x,self.player.y,self.player.size,self.player.size)
+        for o in self.obstacles:
+            obstacleRect=pygame.Rect(o.x-o.size,o.y-o.size,2*o.size,2*o.size)
+            if playerRect.colliderect(obstacleRect):
+                print("gameover")
+
     def render(self):
         self.screen.fill(config.WHITE)
         pygame.draw.rect(self.screen, config.GRAY, self.button_rect)
@@ -46,7 +52,9 @@ class Game:
         result_render = self.font.render(self.api_result, True, config.DARK_GRAY)
         self.screen.blit(result_render, (50, 400))
         self.player.draw(self.screen)
-        self.obstacle.draw(self.screen)
+
+        for o in self.obstacles:
+            o.draw(self.screen)
         pygame.display.flip()
 
     def run(self):
