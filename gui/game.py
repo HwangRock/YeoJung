@@ -4,6 +4,7 @@ import config
 from player import Player
 from obstacle import Obstacle
 from enemy import Enemy
+from ground import Ground
 
 
 class Game:
@@ -19,6 +20,9 @@ class Game:
         self.obstacles = [Obstacle()]
         self.enemies = [
             Enemy(900, config.HEIGHT - config.ENEMY_SIZE)
+        ]
+        self.grounds = [
+            Ground(300, 500, 500, 20)
         ]
         self.clock = pygame.time.Clock()
         self.running = True
@@ -71,6 +75,8 @@ class Game:
             o.draw(self.screen)
         for e in self.enemies:
             e.draw(self.screen)
+        for g in self.grounds:
+            g.draw(self.screen)
 
         pygame.display.flip()
 
