@@ -35,6 +35,11 @@ class Player:
         if keys[pygame.K_r]:
             self.color = config.GRAY
 
+    def land_on(self, y):
+        self.y = y - self.size
+        self.velocity_y = 0
+        self.isJumping = False
+
     def update(self):
         self.handle_input()
         self.velocity_y += self.gravity

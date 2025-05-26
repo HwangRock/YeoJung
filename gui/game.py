@@ -47,6 +47,7 @@ class Game:
 
     def update(self):
         self.player.update()
+        onPlatform = False
 
         playerRect = pygame.Rect(self.player.x, self.player.y, self.player.size, self.player.size)
         for o in self.obstacles:
@@ -62,6 +63,15 @@ class Game:
                     print("gameover : enemy")
                 else:
                     self.enemies.remove(e)
+
+        for p in self.grounds:
+            plat_rect = pygame.Rect(p.x, p.y, p.w, p.h)
+
+            if playerRect.colliderect(plat_rect) and self.player.velocity_y >= 0:
+                if self.player.y + self.player.size <= p.y + self.player.velocity_y:
+                    self.player.land_on(p.y)
+                    onPlatform = True
+                    break
 
     def render(self):
         self.screen.fill(config.WHITE)
