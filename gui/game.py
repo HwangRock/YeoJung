@@ -26,6 +26,8 @@ class Game:
         ]
         self.clock = pygame.time.Clock()
         self.running = True
+        background_img = pygame.image.load("C:/Users/peter/Documents/GitHub/YeoJung/gui/image/morning.png")
+        self.image = pygame.transform.scale(background_img, (config.WIDTH, config.HEIGHT))
 
     def fetch_api_data(self):
         try:
@@ -74,7 +76,7 @@ class Game:
                     break
 
     def render(self):
-        self.screen.fill(config.WHITE)
+        self.screen.blit(self.image, (0, 0))
         pygame.draw.rect(self.screen, config.GRAY, self.button_rect)
         self.screen.blit(self.button_text, (self.button_rect.x + 20, self.button_rect.y + 10))
         result_render = self.font.render(self.api_result, True, config.DARK_GRAY)
