@@ -26,7 +26,7 @@ class Game:
         ]
         self.clock = pygame.time.Clock()
         self.running = True
-        background_img = pygame.image.load("C:/Users/peter/Documents/GitHub/YeoJung/gui/image/morning.png")
+        background_img = pygame.image.load("./image/morning.png")
         self.image = pygame.transform.scale(background_img, (config.WIDTH, config.HEIGHT))
 
     def fetch_api_data(self):
