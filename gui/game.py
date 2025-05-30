@@ -5,6 +5,7 @@ from player import Player
 from obstacle import Obstacle
 from enemy import Enemy
 from ground import Ground
+from api import fetch_test
 
 
 class Game:
@@ -29,23 +30,13 @@ class Game:
         background_img = pygame.image.load("./image/morning.png")
         self.image = pygame.transform.scale(background_img, (config.WIDTH, config.HEIGHT))
 
-    def fetch_api_data(self):
-        try:
-            response = requests.post("http://localhost:8080/test")
-            if response.status_code == 200:
-                return response.text
-            else:
-                return f"Error: {response.status_code}"
-        except Exception as e:
-            return f"Exception: {str(e)}"
-
     def handle_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if self.button_rect.collidepoint(event.pos):
-                    self.api_result = self.fetch_api_data()
+                    self.api_result = fetch_test()
 
     def update(self):
         self.player.update()
