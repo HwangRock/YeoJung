@@ -4,7 +4,7 @@ import pygame
 
 class Player:
     def __init__(self):
-        self.x = 100
+        self.x = 500
         self.y = 100
         self.speed = 5
         self.color = config.BLACK
@@ -40,6 +40,9 @@ class Player:
         self.velocity_y = 0
         self.isJumping = False
 
+    def land_off(self):
+        self.isJumping=True
+
     def update(self):
         self.handle_input()
         self.velocity_y += self.gravity
@@ -48,7 +51,6 @@ class Player:
         if self.y >= config.HEIGHT - self.size:
             self.y = config.HEIGHT - self.size
             self.velocity_y = 0
-            self.isJumping = False
 
     def draw(self, screen):
         pygame.draw.rect(screen, self.color, (self.x, self.y, self.size, self.size))

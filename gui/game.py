@@ -65,6 +65,9 @@ class Game:
                     self.player.land_on(p.y)
                     onPlatform = True
                     break
+        if not onPlatform:
+            self.player.land_off()
+
 
     def render(self):
         self.screen.blit(self.image, (0, 0))
