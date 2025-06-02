@@ -3,9 +3,9 @@ import pygame
 
 
 class Player:
-    def __init__(self):
-        self.x = 500
-        self.y = 100
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
         self.speed = 5
         self.color = config.BLACK
         self.size = 50
@@ -41,7 +41,7 @@ class Player:
         self.isJumping = False
 
     def land_off(self):
-        self.isJumping=True
+        self.isJumping = True
 
     def update(self):
         self.handle_input()

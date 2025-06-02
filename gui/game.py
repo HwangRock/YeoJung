@@ -6,6 +6,7 @@ from obstacle import Obstacle
 from enemy import Enemy
 from ground import Ground
 from api import fetch_test
+from stage1 import Stage1
 
 
 class Game:
@@ -17,7 +18,7 @@ class Game:
         self.button_rect = pygame.Rect(config.BUTTON_X, config.BUTTON_Y, config.BUTTON_WIDTH, config.BUTTON_HEIGHT)
         self.button_text = self.font.render("API", True, config.BLACK)
         self.api_result = ""
-        self.player = Player()
+        self.player = Player(500, 100)
         self.obstacles = [Obstacle()]
         self.enemies = [
             Enemy(900, config.HEIGHT - config.ENEMY_SIZE)
@@ -29,6 +30,23 @@ class Game:
         self.running = True
         background_img = pygame.image.load("./image/morning.png")
         self.image = pygame.transform.scale(background_img, (config.WIDTH, config.HEIGHT))
+        self.stages = [None, Stage1()]
+        self.current_stage_index = 0
+        self.load_stage()
+
+    def load_stage(self):
+        if self.current_stage_index == 0:
+            self.obstacles = [Obstacle()]
+            self.enemies = [Enemy(900, config.HEIGHT - config.ENEMY_SIZE)]
+            self.grounds = [Ground(300, 500, 500, 20)]
+            self.player = self.player
+        else:
+            stage = self.stages[self.current_stage_index]
+            stage.load()
+            self.obstacles = stage.obstacles
+            self.enemies = stage.enemies
+            self.grounds = stage.grounds
+            self.player = stage.player
 
     def handle_events(self):
         for event in pygame.event.get():
@@ -37,6 +55,9 @@ class Game:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if self.button_rect.collidepoint(event.pos):
                     self.api_result = fetch_test()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    self.next_stage()
 
     def update(self):
         self.player.update()
@@ -68,6 +89,10 @@ class Game:
         if not onPlatform:
             self.player.land_off()
 
+    def next_stage(self):
+        if self.current_stage_index + 1 < len(self.stages):
+            self.current_stage_index += 1
+            self.load_stage()
 
     def render(self):
         self.screen.blit(self.image, (0, 0))
