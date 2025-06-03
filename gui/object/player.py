@@ -1,4 +1,4 @@
-import config
+from gui.util import config
 import pygame
 
 

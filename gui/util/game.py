@@ -1,12 +1,11 @@
 import pygame
-import requests
-import config
-from player import Player
-from obstacle import Obstacle
-from enemy import Enemy
-from ground import Ground
+from gui.util import config
+from gui.object.player import Player
+from gui.object.obstacle import Obstacle
+from gui.object.enemy import Enemy
+from gui.object.ground import Ground
 from api import fetch_test
-from stage1 import Stage1
+from gui.stage.stage1 import Stage1
 
 
 class Game:
@@ -28,7 +27,7 @@ class Game:
         ]
         self.clock = pygame.time.Clock()
         self.running = True
-        background_img = pygame.image.load("./image/morning.png")
+        background_img = pygame.image.load("image/morning.png")
         self.image = pygame.transform.scale(background_img, (config.WIDTH, config.HEIGHT))
         self.stages = [None, Stage1()]
         self.current_stage_index = 0

@@ -1,16 +1,16 @@
-import config
+import gui.util.config
 import pygame
 
 
 class Enemy:
     def __init__(self, x, y):
-        self.color = config.RED
+        self.color = gui.util.config.RED
         self.x = x
         self.y = y
         self.startX = x
         self.startY = y
         self.speed = 3
-        self.size = config.ENEMY_SIZE
+        self.size = gui.util.config.ENEMY_SIZE
         self.limit = 100
         self.direct = True
 

@@ -1,4 +1,4 @@
-import config
+import gui.util.config
 import pygame
 
 
@@ -8,7 +8,7 @@ class Ground:
         self.y = y
         self.w = w
         self.h = h
-        self.color = config.GRAY
+        self.color = gui.util.config.GRAY
 
     def draw(self, screen):
         pygame.draw.rect(screen, self.color, (self.x, self.y, self.w, self.h))
